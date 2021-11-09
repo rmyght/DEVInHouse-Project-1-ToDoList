@@ -9,18 +9,18 @@
 </head>
 <body>
     <header><h1>Lista de Afazeres</h1></header>
-    <input type="text"><button type="submit">Adicionar</button>
-    <table>
-        <tr>
-            <th></th>
-            <th>Tarefa</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Caminhar</td>
-            <td><button id="delete">X</button></td>
-        </tr>
+    <input type="text"><button type="submit" onclick="addTodo()">Adicionar</button>
+    <table id="todo-table-list">
+        <thead>
+            <tr>
+                <th>Done?</th>
+                <th>To-do</th>
+                <th>Delete?</th>
+            </tr>
+        </thead>
+        <tbody id="todo-body-list">
+        </tbody>
     </table>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
