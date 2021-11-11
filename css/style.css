@@ -18,3 +18,9 @@ table, th, td {
 th {
     background: #D3D3D3;
 }
+
+::placeholder {
+    color: grey;
+    font-style: italic;
+    opacity: 1;
+}
