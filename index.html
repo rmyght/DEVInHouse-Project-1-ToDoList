@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List - DEVInHouse</title>
     <link rel="shortcut icon" href="img/favicon/checklist.ico">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>To-do List - DEVInHouse</title>
 </head>
 <body>
     <header><h1>Lista de Afazeres</h1></header>
-    <p>Qual a sua tarefa?</p>
-    <input type="text" id="new-task"><button type="submit" onclick="addTodo()">Adicionar</button>
+    <form>
+        <button onclick="clearStorage()">Clear Storage</button>
+        <p>Qual a sua tarefa?</p>
+        <input type="text" id="new-task" name="new-task" placeholder="Escreva sua tarefa aqui"><button type="submit" onclick="addTask()">Adicionar</button>
+    </form>
     <table id="todo-table-list" class="table">
         <thead>
             <tr>
@@ -20,7 +23,7 @@
                 <th>Delete?</th>
             </tr>
         </thead>
-        <tbody id="todo-body-list">
+        <tbody id="task-body-list">
         </tbody>
     </table>
     <script src="scripts/script.js"></script>

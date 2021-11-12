@@ -24,3 +24,7 @@ th {
     font-style: italic;
     opacity: 1;
 }
+
+.done {
+    text-decoration: line-through;
+}
