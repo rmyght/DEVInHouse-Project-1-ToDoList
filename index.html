@@ -5,28 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-do List - DEVInHouse</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="shortcut icon" href="img/favicon/checklist.ico">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <header><h1>Lista de Afazeres</h1></header>
-    <form>
-        <!-- Botão usado para testes - DELETAR na versão final -->
-        <button onclick="clearStorage()">Clear Storage</button>
-        <p>Qual a sua tarefa?</p>
-        <input type="text" id="new-task" name="new-task" placeholder="Escreva sua tarefa aqui"><button type="submit" onclick="addTask()">Adicionar</button>
-    </form>
-    <table id="todo-table-list" class="table">
-        <thead>
-            <tr>
-                <th>Done?</th>
-                <th>To-do</th>
-                <th>Delete?</th>
-            </tr>
-        </thead>
-        <tbody id="task-body-list">
-        </tbody>
-    </table>
+    <header><div class="h1">Lista de Afazeres</div></header>
+    <div class="container">
+        <ul class="list">
+            <form class="container" novalidate="">
+                <label for="new-task">Qual a sua tarefa?</label>
+                <div class="input-group">
+                    <input type="text" id="new-task" class="form-control" placeholder="Escreva sua tarefa aqui" aria-describedby="basic-addon2" required>
+                    <div class="input-group-append">
+                        <button id="btn-add" class="btn btn-outline-secondary" aria-describedby="passwordHelpBlock" type="submit" onclick="addTask()">Adicionar Tarefa</button>
+                    </div>
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback">Missed this one.</div>
+                </div>
+                <small id="passwordHelpBlock" class="form-text text-info">
+                    Sua tarefa deve conter entre 1 e 80 caracteres.
+                </small>
+            </form>
+            <table id="todo-table-list" class="table table-hover table-borderless table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Finalizada?</th>
+                        <th class="task-width-limited">Tarefas</th>
+                        <th>Deletar?</th>
+                    </tr>
+                </thead>
+                <tbody id="task-body-list">
+                </tbody>
+            </table>
+        </ul>
+    </div>
     <script src="scripts/script.js"></script>
 </body>
 </html>

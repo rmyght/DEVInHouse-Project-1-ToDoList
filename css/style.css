@@ -1,12 +1,24 @@
-body {
+/* Modifica o header */
+header {
+    margin-top: 4%;
+    margin-bottom: 2%;
     text-align: center;
 }
 
+/* Modifica o input text */
+::placeholder {
+    color: grey;
+    font-style: italic;
+    opacity: 1;
+}
+
+/* Modifica a tabela */
 table {
-    width: 500px;
+    /* width: 500px; */
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 15px;
 }
 
 table, th, td {
@@ -15,16 +27,18 @@ table, th, td {
     text-align: center;
 }
 
-th {
-    background: #D3D3D3;
-}
-
-::placeholder {
-    color: grey;
-    font-style: italic;
-    opacity: 1;
+.task-width-limited {
+    min-width: 225px;
+    max-width: 225px;
+    white-space:pre-line;
 }
 
 .done {
     text-decoration: line-through;
+    font-style: italic;
+}
+
+/* Modifica o Checkbox */
+.checkbox {
+    
 }

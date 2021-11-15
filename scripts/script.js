@@ -26,22 +26,6 @@ function _addLS(newTask, newTaskID, localTasks) {
     }
 }
 
-// // Salva o checked como 1 ou 0 no Local Storage
-// function _checkUncheckBox(id, checked) {
-//     let objectLocalTask = JSON.parse(actualLocalTasks);
-//     for (let key in objectLocalTask) {
-//         if (key === id){
-//             childObj = objectLocalTask[key];
-//             for (let childKey in childObj) {
-//                 if (childKey === "checked") {
-//                     childObj[childKey] = checked;
-//                     _setItemLS("tasks", JSON.stringify(objectLocalTask));
-//                 }
-//             }
-//         }
-//     }
-// }
-
 // Salva o checked como 1 ou 0 no Local Storage
 function _checkUncheckBox(id, checked) {
     let objectLocalTask = JSON.parse(actualLocalTasks);
@@ -56,7 +40,6 @@ function _checkUncheckBox(id, checked) {
 
 // Cria a tabela de exibição no HTML
 function _createLocalStorageTaskTable(actualLocalStorage) {
-    console.log(actualLocalStorage)
     if (actualLocalStorage) {
         let objectLocalTask = JSON.parse(actualLocalStorage);
         for (let key in objectLocalTask) {
@@ -70,6 +53,8 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                 if (childKey == "checkBox") {
                     let tdCheck = document.createElement("td");
                     tdCheck.id = childObj[childKey];
+                    tdCheck.classList.add("col-md-2");
+                    tdCheck.classList.add("col-sm-2");
                     tr.appendChild(tdCheck);
                     let checkBox = document.createElement("INPUT");
                     checkBox.setAttribute("type", "checkbox");
@@ -93,7 +78,8 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                     let tdTask = document.createElement("td");
                     tdTask.textContent = childObj[childKey];
                     tdTask.id = childObj['taskID'];
-                    if (childObj['checked'] === 1) tdTask.className = "done";
+                    if (childObj['checked'] === 1) tdTask.classList.add("done");
+                    tdTask.classList.add("task-width-limited")
                     tr.appendChild(tdTask);
                 } else if (childKey == "delButton") {
                     // Adiciona o botão de deletar na Lista.
@@ -101,14 +87,16 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                     tdDel.id = childObj[childKey];
                     tr.appendChild(tdDel);
                     let delBtn = document.createElement("BUTTON");
-                    // delBtn.onclick = function() {document.getElementById(this.parentNode.parentNode.id).remove();};
                     delBtn.onclick = function() {
                                             delID = document.getElementById(this.parentNode.parentNode.id).id;
                                             delete objectLocalTask[delID];
                                             _setItemLS("tasks", JSON.stringify(objectLocalTask));
                                             location.reload(true);
                                         };
-                    delBtn.textContent = "X";
+                    delBtn.textContent = "Excluir";
+                    delBtn.classList.add("btn")
+                    delBtn.classList.add("btn-outline-danger")
+                    delBtn.classList.add("btn-sm")
                     tdDel.appendChild(delBtn);
                 }
             }
@@ -132,22 +120,22 @@ function clearStorage() {
 // Adiciona uma tarefa na lista:
 function addTask() {
     let newTask = document.getElementById("new-task").value;
-    // let localTasks = _existsLS("tasks");
     if (actualLocalTasks) {
         let objectLocalTask = JSON.parse(actualLocalTasks);
         newTaskID = _returnTaskNumber(Object.keys(objectLocalTask)[Object.keys(objectLocalTask).length - 1]);
     }
-    console.log(newTaskID);
     if (_isEmpty(newTask)){
         console.log("Test"); // Ajustar código
+    } else if (newTask.length > charLimit) {
+        console.log(`O limite de caracteres é ${charLimit} e você colocou ${newTask.length}`);
     } else {
         _addLS(newTask, newTaskID, actualLocalTasks);
-        // _createTaskTable(newTask, newTaskID);
     }
 }
 
 // Declarações iniciais:
 let newTaskID = _returnTaskNumber(null);
+let charLimit = 80;
 
 let actualLocalTasks = _existsLS("tasks");
 _createLocalStorageTaskTable(actualLocalTasks);
