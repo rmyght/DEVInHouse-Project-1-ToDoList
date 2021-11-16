@@ -5,6 +5,12 @@ header {
     text-align: center;
 }
 
+/* Modifica o body */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #FAFAFA;
+}
+
 /* Modifica o input text */
 ::placeholder {
     color: grey;
@@ -14,17 +20,14 @@ header {
 
 /* Modifica a tabela */
 table {
-    /* width: 500px; */
-    border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
 }
 
 table, th, td {
-    border: 1px solid black;
-    padding: 5px;
     text-align: center;
+    align-items: center;
 }
 
 .task-width-limited {
@@ -39,6 +42,6 @@ table, th, td {
 }
 
 /* Modifica o Checkbox */
-.checkbox {
-    
+input[type="checkbox"] {
+    filter: grayscale();
 }

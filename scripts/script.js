@@ -40,6 +40,7 @@ function _checkUncheckBox(id, checked) {
 
 // Cria a tabela de exibição no HTML
 function _createLocalStorageTaskTable(actualLocalStorage) {
+    document.getElementById("task-table-list").style.visibility = "hidden";
     if (actualLocalStorage) {
         let objectLocalTask = JSON.parse(actualLocalStorage);
         for (let key in objectLocalTask) {
@@ -59,6 +60,7 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                     let checkBox = document.createElement("INPUT");
                     checkBox.setAttribute("type", "checkbox");
                     checkBox.checked = childObj['checked'];
+                    // Função criada dentro do botão de checkbox para marcar e desmarcar o valor no Local Storage
                     checkBox.onclick = function() {
                                             let checkBoxElement = document.getElementById(this.parentNode.id);
                                             let checkBoxID = checkBoxElement.parentNode.id;
@@ -88,19 +90,24 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                     tr.appendChild(tdDel);
                     let delBtn = document.createElement("BUTTON");
                     delBtn.onclick = function() {
-                                            delID = document.getElementById(this.parentNode.parentNode.id).id;
-                                            delete objectLocalTask[delID];
-                                            _setItemLS("tasks", JSON.stringify(objectLocalTask));
-                                            location.reload(true);
+                                            if (confirm('Tem certeza que deseja excluir a tarefa?')) {
+                                                delID = document.getElementById(this.parentNode.parentNode.id).id;
+                                                delete objectLocalTask[delID];
+                                                _setItemLS("tasks", JSON.stringify(objectLocalTask));
+                                                location.reload(true);
+                                            } else {
+                                                location.reload(true);
+                                            }
                                         };
                     delBtn.textContent = "Excluir";
-                    delBtn.classList.add("btn")
-                    delBtn.classList.add("btn-outline-danger")
-                    delBtn.classList.add("btn-sm")
+                    delBtn.classList.add("btn");
+                    delBtn.classList.add("btn-outline-danger");
+                    delBtn.classList.add("btn-sm");
                     tdDel.appendChild(delBtn);
                 }
             }
             console.log(`Tabela da chave ${key} foi criada com sucesso!`);
+            document.getElementById("task-table-list").style.visibility = "visible";
         }
     }
 }
@@ -118,20 +125,29 @@ function clearStorage() {
 }
 
 // Adiciona uma tarefa na lista:
-function addTask() {
+$("#btn-add").click(function(event){
     let newTask = document.getElementById("new-task").value;
-    if (actualLocalTasks) {
-        let objectLocalTask = JSON.parse(actualLocalTasks);
-        newTaskID = _returnTaskNumber(Object.keys(objectLocalTask)[Object.keys(objectLocalTask).length - 1]);
+    let form = $("#form-new-task");
+    if (form[0].checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
     }
     if (_isEmpty(newTask)){
-        console.log("Test"); // Ajustar código
+        document.getElementById("invalid-feedback").innerText = "Você não pode adicionar uma tarefa vazia."
+        form.addClass('was-validated');
+        return;
     } else if (newTask.length > charLimit) {
-        console.log(`O limite de caracteres é ${charLimit} e você colocou ${newTask.length}`);
+        document.getElementById("invalid-feedback").innerText = `O limite de caracteres é de ${charLimit} e você colocou ${newTask.length}. Diminuia ${newTask.length-charLimit} para que a tarefa possa ser adicionada.`
+        form.addClass('was-validated');
+        return;
     } else {
+        if (actualLocalTasks) {
+            let objectLocalTask = JSON.parse(actualLocalTasks);
+            newTaskID = _returnTaskNumber(Object.keys(objectLocalTask)[Object.keys(objectLocalTask).length - 1]);
+        }
         _addLS(newTask, newTaskID, actualLocalTasks);
     }
-}
+});
 
 // Declarações iniciais:
 let newTaskID = _returnTaskNumber(null);
