@@ -47,7 +47,6 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
     if (actualLocalStorage) {
         let objectLocalTask = JSON.parse(actualLocalStorage);
         for (let key in objectLocalTask) {
-            console.log(`Criando a Tabela da chave ${key}`);
             let tr = document.createElement("tr");
             document.getElementById("task-body-list").appendChild(tr);
             tr.id = key;
@@ -110,7 +109,6 @@ function _createLocalStorageTaskTable(actualLocalStorage) {
                     tdDel.appendChild(delBtn);
                 };
             };
-            console.log(`Tabela da chave ${key} foi criada com sucesso!`);
             document.getElementById("task-table-list").style.visibility = "visible";
         };
     };
