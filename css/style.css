@@ -36,6 +36,7 @@ table, th, td {
     white-space:pre-line;
 }
 
+/* Coloca o line-trought na tarefa concluída */
 .done {
     text-decoration: line-through;
     font-style: italic;

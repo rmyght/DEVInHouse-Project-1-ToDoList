@@ -18,14 +18,14 @@
             <form class="container" novalidate="" id="form-new-task">
                 <!-- <label for="new-task">Qual a sua tarefa?</label> -->
                 <div class="input-group">
-                    <input type="text" id="new-task" class="form-control" placeholder="Digite a sua tarefa" aria-describedby="basic-addon2" pattern="^[a-zA-Z0-9]{1,80}$" required>
+                    <input type="text" id="new-task" class="form-control" placeholder="Digite a sua tarefa" pattern="^[a-zA-Z0-9]{1,80}$" required>
                     <div class="input-group-append">
-                        <button id="btn-add" class="btn btn-outline-secondary" aria-describedby="passwordHelpBlock" type="submit">Adicionar</button>
+                        <button id="btn-add" class="btn btn-outline-secondary" aria-describedby="inputHelp" type="submit">Adicionar</button>
                     </div>
                     <div class="valid-feedback"></div>
                     <div id="invalid-feedback" class="invalid-feedback"></div>
                 </div>
-                <small id="passwordHelpBlock" class="form-text text-info">
+                <small id="inputHelp" class="form-text text-info">
                     Sua tarefa deve conter entre 1 e 80 caracteres.
                 </small>
             </form>
@@ -33,7 +33,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th></th>
-                        <th id="task-title" class="task-width-limited">Tarefas</th>
+                        <th class="task-width-limited">Tarefas</th>
                         <th></th>
                     </tr>
                 </thead>
