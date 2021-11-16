@@ -142,7 +142,7 @@ $("#btn-add").click(function(event){
         form.addClass('was-validated');
         return;
     } else if (newTask.length > charMaxLimit) {
-        document.getElementById("invalid-feedback").innerText = `O limite de caracteres é de ${charLimit} e você colocou ${newTask.length}. Diminuia ${newTask.length-charLimit} para que a tarefa possa ser adicionada.`
+        document.getElementById("invalid-feedback").innerText = `O limite de caracteres é de ${charMaxLimit} e você colocou ${newTask.length}. Diminuia ${newTask.length-charMaxLimit} para que a tarefa possa ser adicionada.`
         form.addClass('was-validated');
         return;
     } else {
